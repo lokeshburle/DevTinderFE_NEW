@@ -12,10 +12,9 @@ const Body = () => {
   const navigate = useNavigate();
   const userData = useSelector((store)=>store.user);
 
-
+console.log(userData)
   const fetchUser = async () => {
 
-    console.log("DEV")
     if(userData) return;
     try{
       const user = await axios.get(BASE_URL + "/profile/view", {

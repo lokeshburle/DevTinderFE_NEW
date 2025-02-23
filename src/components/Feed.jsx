@@ -12,7 +12,7 @@ const Feed = () => {
   console.log("Current feed:", feed);
 
   const getFeed = async () => {
-    if (feed.length > 0) return; 
+    console.log("Fetching feed..."); // Debug log
 
     try {
       const result = await axios.get(BASE_URL + "/feed", { withCredentials: true });
@@ -24,15 +24,16 @@ const Feed = () => {
 
   useEffect(() => {
     getFeed();
-  }, []); 
-
+  }, [dispatch]); 
   return (
     <>
-    {feed && 
-    <div className="flex justify-center my-10">
-      
-        <UserCard user={feed[0]} />
-    </div>}
+      {feed && feed.length > 0 ? (
+        <div className="flex justify-center my-10">
+          <UserCard user={feed[0]} />
+        </div>
+      ) : (
+        <p>Loading feed...</p>
+      )}
     </>
   );
 };
