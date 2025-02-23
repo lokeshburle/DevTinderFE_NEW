@@ -23,3 +23,7 @@
 - profile
 - get the feed and add the feed in the store
 - build the user card on feed
+- Edit profile feature
+- show Toast message
+- see all my connection requests
+- new page - see all my requests
