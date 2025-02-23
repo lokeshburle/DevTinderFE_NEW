@@ -9,6 +9,17 @@ const Requests = () => {
     const requests = useSelector((store)=>store.requests);
 
     // const [userRequests, setUserRequests] = useState([]);
+
+    const handleReviewRequests = async(status, _id) => {
+        try{  
+            console.log(`Requesting: ${BASE_URL}/request/review/${status}/${_id}`);  
+            const res = await axios.post(BASE_URL + "/request/review/" + status + "/" + _id, {}, {withCredentials:true});
+            console.log("RES", res)
+        }catch(err){
+            console.log(err);
+        }
+    }
+
     const allRequests = [
         {
             "isPremium": false,
@@ -27,7 +38,7 @@ const Requests = () => {
         },
         {
             "isPremium": false,
-            "_id": "67a9cbc2a255ec9251afddf5",
+            "_id": "67a9cbc2a255ec9251afddf6",
             "firstName": "lokesh",
             "lastName": "burle",
             "emailId": "lokesh123@gmail.com",
@@ -42,7 +53,7 @@ const Requests = () => {
         },
         {
             "isPremium": false,
-            "_id": "67a9cbc2a255ec9251afddf5",
+            "_id": "67a9cbc2a255ec9251afddf7",
             "firstName": "Jay ",
             "lastName": "darshan",
             "emailId": "jay123@gmail.com",
@@ -57,7 +68,7 @@ const Requests = () => {
         },
         {
             "isPremium": false,
-            "_id": "67a9cbc2a255ec9251afddf5",
+            "_id": "67a9cbc2a255ec9251afddf8",
             "firstName": "jyothi",
             "lastName": "jjjj",
             "emailId": "jyothi123@gmail.com",
@@ -96,8 +107,8 @@ if(requests.length == 0) return  <h1>No Requests Found</h1>
         <h1 className='text-bold text-3xl text-white'>Requests</h1>
         {
             requests.map((request)=>{
-                const {firstName, lastName, photoUrl, age, gender, about} = request;
-
+                const {firstName, lastName, photoUrl, age, gender, about, _id} = request;
+                console.log("_id", _id)
                 return(
                     <div className='flex m-4 p-4 border items-center  rounded-lg border-base-300 w-1/2 mx-auto'>
                         <div>
@@ -110,8 +121,8 @@ if(requests.length == 0) return  <h1>No Requests Found</h1>
                             <p>{about}</p>
                         </div>
                         <div>
-                            <button className='btn btn-primary mx-2'>Reject</button>
-                            <button className='btn btn-secondary mx-2'>Accept</button>
+                            <button className='btn btn-primary mx-2' onClick={()=>handleReviewRequests('rejected', _id)}>Reject</button>
+                            <button className='btn btn-secondary mx-2' onClick={()=>handleReviewRequests('accepted', _id)}>Accept</button>
                         </div>
                     </div>
                 )
